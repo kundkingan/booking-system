@@ -1,0 +1,33 @@
+<div class="appLogin">
+	<mat-card>
+		<mat-card-title>
+			Login for Booking System
+		</mat-card-title>
+		<mat-card-content>
+			<div class="loginForm">
+				<mat-form-field>
+					<input matInput placeholder="Enter your email" required [formControl]="emailControl" [(ngModel)]="email">
+					<mat-error *ngIf="emailControl.invalid">{{getErrorMessage()}}</mat-error>
+				</mat-form-field>
+				<mat-form-field>
+					<input matInput placeholder="Enter your password" [type]="'password'" [(ngModel)]="password">
+				</mat-form-field>
+				<div *ngIf="errorMsg" class="loginError">
+					<p>Error</p>
+					<p>{{errorMsg}}</p>
+				</div>
+				<div class="loginButton">
+					<button mat-raised-button [disabled]='bothInputValid()' (click)="signIn()">
+						<div *ngIf="!spinner; then showText else showSpinner"></div>
+						<ng-template #showText>
+							Login
+						</ng-template>
+						<ng-template #showSpinner>
+							<mat-spinner [strokeWidth]="2" [diameter]="20"></mat-spinner>
+						</ng-template>
+					</button>
+				</div>
+			</div>
+		</mat-card-content>
+	</mat-card>
+</div>

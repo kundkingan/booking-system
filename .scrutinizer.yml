@@ -1,0 +1,18 @@
+checks:
+    javascript: true
+
+build:
+    environment:
+        node: v9.0.0
+    dependencies:
+        before:
+            - npm install -g @angular/cli@latest
+            - node server.js &
+
+    tests:
+        override:
+            -
+                command: 'ng test -cc'
+                coverage:
+                    file: 'coverage/clover.xml'
+                    format: 'clover'

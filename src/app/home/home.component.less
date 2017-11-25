@@ -1,0 +1,56 @@
+.dateInput {
+	max-width: 300px;
+	margin: 0 auto;
+	mat-form-field { width: 100%; }
+}
+
+.currentUsers {
+  float: right;
+  line-height: 1;
+  display: inline-flex;
+}
+
+
+mat-table {
+
+	mat-row:hover {
+		border-bottom-color: #000;
+		cursor: pointer;
+	}
+
+	mat-row.booked {
+		background: rgba(0, 0, 0, 0.04);
+		&:hover {
+			cursor: default;
+			border-bottom-color: rgba(0,0,0,.12);
+		}
+		
+		mat-cell {
+			color: rgba(0, 0, 0, 0.3);
+		}	
+	}
+}
+
+
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+	.appHome {
+  	// width: 80%;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.appHome {
+  	// width: 50%;
+	}
+}
+
+// /* #### Tablets Portrait or Landscape #### */
+// @media screen and (min-device-width: 768px) and (max-device-width: 1024px){
+//   /* some CSS here */
+// }
+
+// /* #### Desktops #### */
+// @media screen and (min-width: 1024px){
+//   /* some CSS here */
+// }
