@@ -28,6 +28,10 @@ export class AppComponent{
 	}
 
 	subscribeToSocket() {
+		this.dataService.getOnOpen$.subscribe(data => {
+			this.dataService.sendCurrentUsers(data['clients']);
+		});
+
 		this.dataService.getOnMessage$.subscribe(data => {
 			console.log(data);
 			if (data['type'] === 'open' || data['type'] === 'close') {
@@ -36,25 +40,28 @@ export class AppComponent{
 				this.handlelogin(data);
 			} else if (data['type'] === 'bookings') {
 				this.handleSelectedDate(data);
+			} else if (data['type'] === 'userId') {
+				this.sessionService.setIdToUserInfo(data['id']);
 			}
-		});
-
-		this.dataService.getOnOpen$.subscribe(data => {
-			this.dataService.sendCurrentUsers(data['clients']);
 		});
 	}
 
-	handlelogin(data) {
-		if (data['success']) {
-			this.sessionService.saveUserInfo({loggedIn: true, idToken: data['idToken'], name: data['name']});
+	handlelogin(login) {
+		if (login['success']) {
+			this.sessionService.saveUserInfo({
+				loggedIn: true, 
+				id: login['id'],
+				idToken: login['idToken'], 
+				name: login['name']
+			});
 			this.router.navigate(['/home']);
 		} else {
-			this.dataService.sendOnLoginFail(data['errorMsg']);
+			this.dataService.sendOnLoginFail(login['errorMsg']);
 		}
 	}
 
-	handleSelectedDate(data) {
-		this.dataService.sendBookings(data['bookings']);
+	handleSelectedDate(bookings) {
+		this.dataService.sendBookings(bookings);
 	}
 
 }

@@ -28,14 +28,15 @@ export class HomeComponent {
 		});
 
 		this.dataService.getBookings$.subscribe(bookings => {
-			this.bookings.insertData(bookings);
+			if (this.chosenDate === bookings['date']) this.bookings.insertData(bookings['bookings']);
 		});
 	}
 
 	onChangeDate(event) {
 		event.value.setSeconds(3600);
 		this.chosenDate = event.value.toISOString().split('T')[0];
-		this.socketService.send({ 
+		this.socketService.send({
+			id: this.sessionService.getUserInfo().id,
 			type: 'date', 
 			idToken: this.sessionService.getUserInfo().idToken, 
 			date: this.chosenDate

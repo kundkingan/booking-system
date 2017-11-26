@@ -24,11 +24,11 @@ export class LoginComponent implements OnInit {
     this.dataService.getOnLoginFail$.subscribe(errorMsg => {
       this.errorMsg = errorMsg;
       this.spinner = false;
-    })
+    });
   }
 
   ngOnInit() {
-    if (this.sessionService.getUserInfo['loggedIn']) this.router.navigate(['/home'])
+    if (this.sessionService.getUserInfo['loggedIn']) this.router.navigate(['/home']);
   }
 
 	getErrorMessage() {
@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
 
   signIn() {
   	this.socketService.send({
+      id: this.sessionService.getUserInfo().id,
       type: 'login', 
       email: this.email, 
       password: this.password

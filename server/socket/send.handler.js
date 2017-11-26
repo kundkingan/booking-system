@@ -5,7 +5,8 @@ class SendHandler {
 	constructor(webSocketServer, webSocket) {
 		this.wss = webSocketServer;
 		this.webSocket = webSocket;
-		this.users = [];
+		this.users = {};
+		this.posOfLeaver;
 	}
 
 	initSendHandler(webSocketServer, webSocket) {
@@ -15,68 +16,85 @@ class SendHandler {
 	}
 
 	onConnection(ws) {
-		this.ws = ws;
-		this.sendToClients({type: 'open', clients: this.wss.clients.size}, true);
+		let posFound = false, pos;
+		for (let i = 0; i < this.users.length; i++) {
+			if (!this.users[i]) {
+				posFound = true;
+				pos = i;
+				break;
+			}
+		}
+		posFound ? this.users[pos] = ws : pos = this.users.push(ws) - 1;
+
+		this.sendToClient(ws, { type: 'userId', id: pos });
+		this.sendToClients({ type: 'open', clients: this.wss.clients.size }, true);
 		console.log('Connection received: ' + this.wss.clients.size);
 	}
 	
-	onClose(code, reason) {
-    this.sendToClients({type: 'close', clients: this.wss.clients.size}, true)
+	onClose(ws, code, reason) {
+    this.sendToClients({type: 'close', clients: this.wss.clients.size});
+    for (let i = 0; i < this.users.length; i++) {
+    	if (this.users[i] === ws) {
+    		this.users.splice(i, 1, null);
+    		break;
+    	}
+    }
     console.log(`Closing connection: ${code} ${reason}`);
 	}
 
 	onMessage(message) {
 		if (message.type === 'login') {
-			this.signInUser(message);
+			this.signInUser(message.id, message.email, message.password);
 		} else if (message.type === 'date') {
-			this.handleGetSpecificDate(message.idToken, message.date);
+			this.handleGetSpecificDate(message.id, message.idToken, message.date);
 		} else if (message.type === 'book') {
-			this.handleBookTime(message.idToken, message.date, message.time, message.name);
+			this.handleBookTime(
+				message.id,
+				message.idToken, 
+				message.date, 
+				message.time, 
+				message.name);
 		}
 	}
 
-	sendToClient(message) {
+	sendToClient(ws, message) {
 		this.wss.clients.forEach((client) => {
 			if (client.readyState === this.webSocket.OPEN) {
-				if (client === this.ws) client.send(JSON.stringify(message));
+				if (client === ws) client.send(JSON.stringify(message));
 			}
 		});
 	}
 
-	sendToClients(message, toAll = false) {
+	sendToClients(message) {
 		this.wss.clients.forEach((client) => {
-			let send = true;
-			if (client.readyState === this.webSocket.OPEN) 
-				if (!toAll && client === this.ws) send = false
-			
-			if (send) client.send(JSON.stringify(message));
+			if (client.readyState === this.webSocket.OPEN) client.send(JSON.stringify(message));
 		});
 	}
 
-	signInUser(message) {
-		if (message.email && message.password) {
-			FirebaseHandler.signIn(message.email, message.password)
+	signInUser(id, email, password) {
+		if (email && password) {
+			FirebaseHandler.signIn(email, password)
 				.then((res) => {
-					this.sendToClient( 
+					this.sendToClient(this.users[id], 
 						{
 							type: 'login', 
 							success: true, 
 							idToken: res, 
-							name: message.email.substr(0, message.email.indexOf('@'))
+							name: email.substr(0, email.indexOf('@'))
 						});		
 				})
 				.catch((error) => {
-					this.sendToClient({ type: 'login', success: false, errorMsg: error });
+					this.sendToClient(this.users[id], { type: 'login', success: false, errorMsg: error });
 				});
 		}
 	}
 
-	handleGetSpecificDate(idToken, date) {
+	handleGetSpecificDate(id, idToken, date) {
 		FirebaseHandler.authToken(idToken)
 			.then((res) => {
 				FirebaseHandler.fetchSpecificDate(date)
 					.then((res) => {
-						this.sendToClient({ type: 'bookings', bookings: res ? [res] : [] });
+						this.sendToClient(this.users[id], { type: 'bookings', date: date, bookings: res ? [res] : [] });
 					})
 					.catch((error) => {
 						console.log('error : fetchSpecificDate');
@@ -88,12 +106,12 @@ class SendHandler {
 			});
 	}
 
-	handleBookTime(idToken, date, time, name) {
+	handleBookTime(id, idToken, date, time, name) {
 		FirebaseHandler.authToken(idToken)
 			.then((res) => {
 				FirebaseHandler.bookTime(date, name, time)
 					.then((res) => {
-						this.sendToClients({ type: 'bookings', bookings: res ? [res] : [] }, true);	
+						this.sendToClients({ type: 'bookings', date: date, bookings: res ? [res] : [] });	
 					})	
 					.catch((error) => {
 						console.log('error : booking');
@@ -107,4 +125,3 @@ class SendHandler {
 }
 
 module.exports = new SendHandler();
-
