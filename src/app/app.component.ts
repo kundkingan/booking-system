@@ -17,11 +17,11 @@ export class AppComponent{
 		private sessionService: SessionService,
 		private router: Router) 
 	{
-		this.checkLoggin();
+		this.checklogin();
 		this.subscribeToSocket();
 	}
 
-	checkLoggin() {
+	checklogin() {
 		this.sessionService.initUserInfo();
 		this.userInfo = this.sessionService.getUserInfo();
 		this.userInfo['loggedIn'] ? this.router.navigate(['/home']) : this.router.navigate(['/login'])
@@ -32,8 +32,8 @@ export class AppComponent{
 			console.log(data);
 			if (data['type'] === 'open' || data['type'] === 'close') {
 				this.dataService.sendCurrentUsers(data['clients']);
-			} else if (data['type'] === 'loggin') {
-				this.handleLoggin(data);
+			} else if (data['type'] === 'login') {
+				this.handlelogin(data);
 			} else if (data['type'] === 'bookings') {
 				this.handleSelectedDate(data);
 			}
@@ -44,7 +44,7 @@ export class AppComponent{
 		});
 	}
 
-	handleLoggin(data) {
+	handlelogin(data) {
 		if (data['success']) {
 			this.sessionService.saveUserInfo({loggedIn: true, idToken: data['idToken'], name: data['name']});
 			this.router.navigate(['/home']);

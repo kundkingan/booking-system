@@ -29,3 +29,5 @@ const server = http.createServer(app);
 const socket = webSocket(server);
 
 server.listen(port, () => console.log(`API running on localhost:${port}`));
+
+module.exports = server;

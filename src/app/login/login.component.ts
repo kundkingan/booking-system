@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
 
   signIn() {
   	this.socketService.send({
-      type: 'loggin', 
+      type: 'login', 
       email: this.email, 
       password: this.password
     });

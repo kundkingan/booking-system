@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 
-import { ServerService, SocketService, DataService, SessionService } from './_services'
+import { SocketService, DataService, SessionService } from './_services'
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import { ServerService, SocketService, DataService, SessionService } from './_se
     HttpClientModule,
     RouterModule.forRoot(AppRoutes)
   ],
-  providers: [ServerService, SocketService, DataService, SessionService],
+  providers: [SocketService, DataService, SessionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -26,7 +26,7 @@ class SendHandler {
 	}
 
 	onMessage(message) {
-		if (message.type === 'loggin') {
+		if (message.type === 'login') {
 			this.signInUser(message);
 		} else if (message.type === 'date') {
 			this.handleGetSpecificDate(message.idToken, message.date);
@@ -53,20 +53,20 @@ class SendHandler {
 		});
 	}
 
-	signInUser( message) {
+	signInUser(message) {
 		if (message.email && message.password) {
 			FirebaseHandler.signIn(message.email, message.password)
 				.then((res) => {
 					this.sendToClient( 
 						{
-							type: 'loggin', 
+							type: 'login', 
 							success: true, 
 							idToken: res, 
 							name: message.email.substr(0, message.email.indexOf('@'))
 						});		
 				})
 				.catch((error) => {
-					this.sendToClient({ type: 'loggin', success: false, errorMsg: error });
+					this.sendToClient({ type: 'login', success: false, errorMsg: error });
 				});
 		}
 	}

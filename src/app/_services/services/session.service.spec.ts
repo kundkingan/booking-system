@@ -2,14 +2,23 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { SessionService } from './session.service';
 
-describe('SessionService', () => {
+class MockSessionService {
+  initUserInfo() {
+    return true;
+  }
+}
+
+describe('Test: SessionService', () => {
+	let mockSessionService;
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [SessionService]
-    });
+  	mockSessionService = new MockSessionService();
+    // TestBed.configureTestingModule({
+    //   providers: [{provide: SessionService, useValue: SessionServiceStub }]
+    // });
   });
 
-  it('should be created', inject([SessionService], (service: SessionService) => {
-    expect(service).toBeTruthy();
-  }));
+
+  it('should get true', () => {
+    expect(mockSessionService.initUserInfo()).toEqual(true);
+  });
 });

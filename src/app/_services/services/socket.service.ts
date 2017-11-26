@@ -2,7 +2,6 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { DataService } from './data.service';
 
-
 const URL = 'ws://localhost:3000/';
 
 @Injectable()
