@@ -12,7 +12,6 @@ import { Bookings } from './booking.interface';
 })
 export class BookingComponent {
 
-  public currentUsers: Number = 0;
 	public chosenDate;
 	public displayedColumns = ['Time', 'Booked', 'By'];
   public dataSource = new MatTableDataSource(this.bookings.element_data);
@@ -24,11 +23,6 @@ export class BookingComponent {
 		private bookings: Bookings,
 		private router: Router) 
 	{
-		this.currentUsers = this.dataService.currentUsers;
-		this.dataService.getCurrentUsers$.subscribe(clients => {
-			this.currentUsers = clients;
-		});
-
 		this.dataService.getBookings$.subscribe(bookings => {
 			if (this.chosenDate === bookings['date']) this.bookings.insertData(bookings['bookings']);
 		});

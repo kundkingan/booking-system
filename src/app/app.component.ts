@@ -28,14 +28,10 @@ export class AppComponent{
 	}
 
 	subscribeToSocket() {
-		this.dataService.getOnOpen$.subscribe(data => {
-			this.dataService.sendCurrentUsers(data['clients']);
-		});
-
 		this.dataService.getOnMessage$.subscribe(data => {
 			console.log(data);
 			if (data['type'] === 'open' || data['type'] === 'close') {
-				this.dataService.sendCurrentUsers(data['clients']);
+				this.sessionService.setIdToUserInfo(data['id']);
 			} else if (data['type'] === 'login') {
 				this.handlelogin(data);
 			} else if (data['type'] === 'bookings') {

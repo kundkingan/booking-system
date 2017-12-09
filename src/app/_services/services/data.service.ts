@@ -4,8 +4,6 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class DataService {
 
-  public currentUsers: Number = 0;
-
   private getCurrentUsersSource = new Subject<Number>();
   private getOnOpenSource = new Subject<string>();
   private getOnMessageSource = new Subject<string>();
@@ -18,11 +16,6 @@ export class DataService {
   getOnLoginFail$ = this.getOnLoginFailSource.asObservable();
   getBookings$ = this.getBookingsSource.asObservable();
  
-  sendCurrentUsers(clients: Number) {
-    this.currentUsers = clients;
-    this.getCurrentUsersSource.next(clients);
-  }
-
   sendOnOpen(data) {
     this.getOnMessageSource.next(data);
   }

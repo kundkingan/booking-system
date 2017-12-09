@@ -31,7 +31,6 @@ class SendHandler {
 		posFound ? this.users[pos] = ws : pos = this.users.push(ws) - 1;
 
 		this.sendToClient(ws, { type: 'userId', id: pos });
-		this.sendToClients({ type: 'open', clients: this.wss.clients.size }, true);
 		console.log('Connection received: ' + this.wss.clients.size);
 	}
 	
