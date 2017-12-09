@@ -1,10 +1,14 @@
 let FirebaseHandler = require('../firebase/firebase.handler');
+let FirebaseAuthNode = require('firebase-auth-node');
+let firebaseConfig = require('../firebase/firebase.config.json');
+let serviceAccount = require('../firebase/firebase.service-key.json');
 
 class SendHandler {
 
 	constructor(webSocketServer, webSocket) {
 		this.wss = webSocketServer;
 		this.webSocket = webSocket;
+		this.firebaseAuth = new FirebaseAuthNode(firebaseConfig, serviceAccount, 'admin-auth');
 		this.users = {};
 		this.posOfLeaver;
 	}
@@ -44,7 +48,7 @@ class SendHandler {
 
 	onMessage(message) {
 		if (message.type === 'login') {
-			this.signInUser(message.id, message.email, message.password);
+			this.handleSignIn(message.id, message.email, message.password);
 		} else if (message.type === 'date') {
 			this.handleGetSpecificDate(message.id, message.idToken, message.date);
 		} else if (message.type === 'book') {
@@ -71,9 +75,9 @@ class SendHandler {
 		});
 	}
 
-	signInUser(id, email, password) {
+	handleSignIn(id, email, password) {
 		if (email && password) {
-			FirebaseHandler.signIn(email, password)
+			this.firebaseAuth.signIn(email, password)
 				.then((res) => {
 					this.sendToClient(this.users[id], 
 						{
@@ -90,7 +94,7 @@ class SendHandler {
 	}
 
 	handleGetSpecificDate(id, idToken, date) {
-		FirebaseHandler.authToken(idToken)
+		this.firebaseAuth.authToken(idToken)
 			.then((res) => {
 				FirebaseHandler.fetchSpecificDate(date)
 					.then((res) => {
@@ -107,7 +111,7 @@ class SendHandler {
 	}
 
 	handleBookTime(id, idToken, date, time, name) {
-		FirebaseHandler.authToken(idToken)
+		this.firebaseAuth.authToken(idToken)
 			.then((res) => {
 				FirebaseHandler.bookTime(date, name, time)
 					.then((res) => {

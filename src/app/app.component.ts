@@ -24,7 +24,7 @@ export class AppComponent{
 	checklogin() {
 		this.sessionService.initUserInfo();
 		this.userInfo = this.sessionService.getUserInfo();
-		this.userInfo['loggedIn'] ? this.router.navigate(['/home']) : this.router.navigate(['/login'])
+		if (!this.userInfo['loggedIn']) this.router.navigate(['/login']);
 	}
 
 	subscribeToSocket() {
@@ -54,7 +54,7 @@ export class AppComponent{
 				idToken: login['idToken'], 
 				name: login['name']
 			});
-			this.router.navigate(['/home']);
+			this.router.navigate(['']);
 		} else {
 			this.dataService.sendOnLoginFail(login['errorMsg']);
 		}

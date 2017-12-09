@@ -1,9 +1,9 @@
-<div class="appHome">
+<div class="appBooking">
 	<mat-card>
 
 		<mat-card-title>
 			Booking System
-			<div class="currentUsers">
+			<div class="currentUsers" (click)="onUserProfile()">
 				<span><mat-icon>person</mat-icon></span>
 				<span>{{currentUsers}}</span>
 			</div>
@@ -32,6 +32,8 @@
     			[ngClass]="{'booked' : row.Booked === 'Yes'}" (click)="onBookTime(row)"></mat-row>
 				</mat-table> 
 			</div>
+
 		</mat-card-content>
+		
 	</mat-card>
 </div>

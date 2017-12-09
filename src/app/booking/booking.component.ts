@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
 import { DataService, SocketService, SessionService } from '../_services'
-import { Bookings } from './home.interface';
+import { Bookings } from './booking.interface';
 
 @Component({
-	selector: 'app-home',
-	templateUrl: './home.component.html',
-	styleUrls: ['./home.component.less'],
-	providers: [Bookings]
+  selector: 'app-booking',
+  templateUrl: './booking.component.html',
+  styleUrls: ['./booking.component.less'],
+  providers: [Bookings]
 })
-export class HomeComponent {
+export class BookingComponent {
 
-	public currentUsers: Number = 0;
+  public currentUsers: Number = 0;
 	public chosenDate;
 	public displayedColumns = ['Time', 'Booked', 'By'];
   public dataSource = new MatTableDataSource(this.bookings.element_data);
@@ -20,7 +21,8 @@ export class HomeComponent {
 		private dataService: DataService, 
 		private socketService: SocketService, 
 		private sessionService: SessionService,
-		private bookings: Bookings) 
+		private bookings: Bookings,
+		private router: Router) 
 	{
 		this.currentUsers = this.dataService.currentUsers;
 		this.dataService.getCurrentUsers$.subscribe(clients => {
@@ -54,6 +56,10 @@ export class HomeComponent {
 				time: selectedTime.Time
 			});
 		} 
+	}
+
+	onUserProfile() {
+		this.router.navigate(['/profile']);
 	}
 
 }

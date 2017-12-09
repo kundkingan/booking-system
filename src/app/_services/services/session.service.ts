@@ -17,7 +17,7 @@ export class SessionService {
     name: null
   }
 
-  public initUserInfo() {
+  initUserInfo() {
   	if (!localStorage.getItem('userInfo')) {
   		localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
       return true;
@@ -25,18 +25,22 @@ export class SessionService {
     return false;
   }
 
-  public saveUserInfo(userInfo: UserInfo) {
+  saveUserInfo(userInfo: UserInfo) {
   	localStorage.setItem('userInfo', JSON.stringify(userInfo));
   }
 
-  public setIdToUserInfo(id) {
+  setIdToUserInfo(id) {
     let userInfo = this.getUserInfo();
-    userInfo.id = id;
+    this.userInfo.id = userInfo.id = id;
     this.saveUserInfo(userInfo);
   }
 
-  public getUserInfo() {
+  getUserInfo() {
   	return JSON.parse(localStorage.getItem('userInfo'));
+  }
+
+  unsetUserInfo() {
+    localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
   }
 
 }
