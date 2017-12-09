@@ -8,5 +8,30 @@
 			</div>
 		</mat-card-title>
 
+		<mat-card-content>
+			<div class="bookings">
+				
+				<div class="booking" *ngFor="let booking of bookings">
+					<div class="dateTime">
+						<div class="date">
+							<mat-icon>date_range</mat-icon>	
+							<h3> {{booking.date}} </h3>
+						</div>
+
+						<div class="time">
+							<mat-icon matListIcon>access_time</mat-icon>	
+							<h3> {{booking.time}} </h3>
+						</div>
+					</div>
+
+					<div class="button" (click)="onCancel(booking.date, booking.time)">
+						<button mat-raised-button color="warn">Cancel</button>
+					</div>
+
+				</div>
+
+			</div>
+		</mat-card-content>
+
 	</mat-card>
 </div>

@@ -1,30 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
-import { DataService, SocketService, SessionService } from '../_services'
+import { DataService, SocketService, SessionService } from '../_services';
 import { Bookings } from './booking.interface';
 
 @Component({
-  selector: 'app-booking',
-  templateUrl: './booking.component.html',
-  styleUrls: ['./booking.component.less'],
-  providers: [Bookings]
+	selector: 'app-booking',
+	templateUrl: './booking.component.html',
+	styleUrls: ['./booking.component.less'],
+	providers: [Bookings]
 })
 export class BookingComponent {
+	
+	private userInfo = this.sessionService.getUserInfo();
 
-	public chosenDate;
-	public displayedColumns = ['Time', 'Booked', 'By'];
-  public dataSource = new MatTableDataSource(this.bookings.element_data);
+	chosenDate;
+	displayedColumns = ['Time', 'Booked', 'By'];
+	dataSource = new MatTableDataSource(this.bookings.element_data);
 
 	constructor(
-		private dataService: DataService, 
-		private socketService: SocketService, 
+		private dataService: DataService,
+		private socketService: SocketService,
 		private sessionService: SessionService,
 		private bookings: Bookings,
 		private router: Router) 
 	{
 		this.dataService.getBookings$.subscribe(bookings => {
-			if (this.chosenDate === bookings['date']) this.bookings.insertData(bookings['bookings']);
+			if (this.chosenDate === bookings['date']) { this.bookings.insertData(bookings['bookings']); }
 		});
 	}
 
@@ -32,24 +34,25 @@ export class BookingComponent {
 		event.value.setSeconds(3600);
 		this.chosenDate = event.value.toISOString().split('T')[0];
 		this.socketService.send({
-			id: this.sessionService.getUserInfo().id,
-			type: 'date', 
-			idToken: this.sessionService.getUserInfo().idToken, 
+			id:  this.userInfo.id,
+			type: 'date',
+			idToken:  this.userInfo.idToken,
 			date: this.chosenDate
 		});
 	}
 
 	onBookTime(selectedTime) {
 		if (selectedTime.Booked === 'No') {
-			let userInfo = this.sessionService.getUserInfo();
 			this.socketService.send({
-				type: 'book', 
-				idToken: userInfo.idToken,
+				type: 'book',
+				id:  this.userInfo.id,
+				idToken: this.userInfo.idToken,
+				uid: this.userInfo.uid,
 				date: this.chosenDate,
-				name: userInfo.name, 
+				name: this.userInfo.name,
 				time: selectedTime.Time
 			});
-		} 
+		}
 	}
 
 	onUserProfile() {

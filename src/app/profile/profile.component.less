@@ -11,3 +11,50 @@
 mat-card-title.mat-card-title {
 	line-height: 1;
 }
+
+.booking {
+	margin: 24px 0;
+
+	.dateTime {
+		.date, .time {
+			display: flex;
+			line-height: 1.5;
+			& > h3 {
+				margin: 0;
+				padding-left: 16px;
+			}
+		}
+	}
+
+	.button { display: flex; }
+}
+
+@media screen and (max-device-width: 480px) and (orientation: portrait){
+  .date, .time {
+		width: 150px;
+		margin: 0 auto;
+	}
+
+	.button { justify-content: center; }
+	.dateTime > div { padding: 8px; }
+}
+
+/* #### Tablets Portrait or Landscape #### */
+@media screen and (min-device-width: 480px) {
+	.dateTime {
+		display: flex;
+		.date, .time { flex: 1; }
+	}
+
+	.booking {
+		display: flex;
+		.dateTime {
+			flex: 1;
+		}
+
+		.button {
+			flex: 0;
+			justify-content: flex-end;
+		}
+	}
+}

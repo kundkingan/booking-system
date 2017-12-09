@@ -13,10 +13,10 @@ export class Bookings {
 	];
 
 	insertData(bookings) {
-		for (let element of this.element_data) {
+		for (const element of this.element_data) {
 			element.By = null;
 			element.Booked = 'No';
-			for (let booked of bookings) {
+			for (const booked of bookings) {
 				if (booked[element.Time]) {
 					element.Booked = 'Yes';
 					element.By = booked[element.Time]['by'];

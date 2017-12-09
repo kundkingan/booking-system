@@ -7,16 +7,15 @@ import { DataService, SessionService } from './_services';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less']
 })
-export class AppComponent{
+export class AppComponent {
 
 	public messages: Array<any>;
 	private userInfo;
 
 	constructor(
-		private dataService: DataService, 
+		private dataService: DataService,
 		private sessionService: SessionService,
-		private router: Router) 
-	{
+		private router: Router) {
 		this.checklogin();
 		this.subscribeToSocket();
 	}
@@ -24,20 +23,26 @@ export class AppComponent{
 	checklogin() {
 		this.sessionService.initUserInfo();
 		this.userInfo = this.sessionService.getUserInfo();
-		if (!this.userInfo['loggedIn']) this.router.navigate(['/login']);
+		if (!this.userInfo['loggedIn']) { this.router.navigate(['/login']); }
 	}
 
 	subscribeToSocket() {
 		this.dataService.getOnMessage$.subscribe(data => {
 			console.log(data);
-			if (data['type'] === 'open' || data['type'] === 'close') {
-				this.sessionService.setIdToUserInfo(data['id']);
-			} else if (data['type'] === 'login') {
-				this.handlelogin(data);
-			} else if (data['type'] === 'bookings') {
-				this.handleSelectedDate(data);
-			} else if (data['type'] === 'userId') {
-				this.sessionService.setIdToUserInfo(data['id']);
+
+			switch (data['type']) {
+				case 'login':
+					this.handlelogin(data);
+					break;
+				case 'bookings':
+					this.handleSelectedDate(data);
+					break;
+				case 'user':
+					this.handleProfile(data);
+					break;
+				case 'userId':
+					this.sessionService.setIdToUserInfo(data['id']);
+					break;
 			}
 		});
 	}
@@ -45,9 +50,10 @@ export class AppComponent{
 	handlelogin(login) {
 		if (login['success']) {
 			this.sessionService.saveUserInfo({
-				loggedIn: true, 
+				loggedIn: true,
 				id: login['id'],
-				idToken: login['idToken'], 
+				idToken: login['idToken'],
+				uid: login['uid'],
 				name: login['name']
 			});
 			this.router.navigate(['']);
@@ -58,6 +64,10 @@ export class AppComponent{
 
 	handleSelectedDate(bookings) {
 		this.dataService.sendBookings(bookings);
+	}
+
+	handleProfile(profile) {
+		this.dataService.sendProfile(profile);
 	}
 
 }

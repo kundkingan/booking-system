@@ -11,7 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { BookingComponent } from './booking/booking.component';
 import { ProfileComponent } from './profile/profile.component';
 
-import { SocketService, DataService, SessionService } from './_services'
+import { SocketService, DataService, SessionService } from './_services';
 
 @NgModule({
   declarations: [

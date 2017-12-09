@@ -3,12 +3,9 @@ let serviceAccount = require('./firebase.service-key.json');
 let firebaseConfig = require('./firebase.config.json');
 
 class FirebaseHandler {
-
 	constructor() {
-		// this.firebase = require('firebase');
 		this.admin = require('firebase-admin');
 
-		// this.firebase.initializeApp(firebaseConfig, 'database');
 		this.admin.initializeApp({
 			credential: this.admin.credential.cert(serviceAccount),
 			databaseURL: "https://booking-system-7f301.firebaseio.com"
@@ -16,30 +13,72 @@ class FirebaseHandler {
 		this.database = this.admin.database();
 	}
 
-	fetchSpecificDate(date) {
+	getSpecificDate(date) {
 		return this.database.ref('bookings').child(date).once('value')
-		.then(snapshot => {
-			return snapshot.val();
-		})
-		.catch((error) => {
-			console.log(error.message);
-			console.log('error fetch')
-			throw error;
-		});
+			.then(snapshot => {
+				return snapshot.val();
+			})
+			.catch((error) => {
+				console.log('error get date');
+				throw error;
+			});
 	}
 
-	bookTime(date, name, time) {
+	getUser(uid) {
+		return this.database.ref('users').child(uid).once('value')
+			.then(snapshot => {
+				return snapshot.val();
+			})
+			.catch((error) => {
+				console.log('error get userinfo');
+				throw error;
+			});
+	}
+
+	updateBooking(date, time, name) {
 		return this.database.ref('bookings').child(date).child(time)
-		.set({ time: time, by: name })
-		.then(() => {
-			return this.fetchSpecificDate(date);
-		})
-		.catch((error) => {
-			console.log('error book')
-			throw error;
-		});
+			.set({ time: time, by: name })
+			.then(() => {
+				return this.getSpecificDate(date);
+			})
+			.catch((error) => {
+				console.log('error book');
+				throw error;
+			});
 	}
 
+	updateUserBooking(uid, date, time) {
+		return this.database.ref('users')
+			.child(uid).child('bookings').child(date)
+			.set({ date: date, time: time })
+			.catch((error) => {
+				console.log('error book');
+				throw error;
+			});
+	}
+
+	removeBooking(date, time) {
+		return this.database.ref('bookings').child(date).child(time)
+			.remove()
+			.then(() => {
+				return this.getSpecificDate(date);
+			})
+			.catch((error) => {
+				console.log('error cancel');
+				throw error;
+			});
+	}
+
+	removeUserBooking(uid, date) {
+		return this.database.ref('users')
+			.child(uid).child('bookings').child(date)
+			.remove()
+			.catch((error) => {
+				console.log('error book');
+				throw error;
+			});
+	}
+	
 }
 
 module.exports = new FirebaseHandler();

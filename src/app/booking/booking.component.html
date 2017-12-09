@@ -11,10 +11,10 @@
 		<mat-card-content>
 			<div class="dateInput">
 				<mat-form-field>
-				  <input matInput [matDatepicker]="picker" placeholder="Choose a date"
-				  	(dateChange)="onChangeDate($event)" (click)="picker.open()">
-				  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-				  <mat-datepicker startView="month" #picker></mat-datepicker>
+					<input matInput [matDatepicker]="picker" placeholder="Choose a date"
+						(dateChange)="onChangeDate($event)" (click)="picker.open()">
+					<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+					<mat-datepicker startView="month" #picker></mat-datepicker>
 				</mat-form-field>
 			</div>
 
@@ -22,13 +22,13 @@
 				<mat-table [dataSource]="dataSource">
 					<ng-template ngFor let-item [ngForOf]="displayedColumns" let-i="index">
 						<ng-container matColumnDef="{{item}}">
-				      <mat-header-cell *matHeaderCellDef> {{item}} </mat-header-cell>
-				      <mat-cell *matCellDef="let element">{{element[item]}}</mat-cell>
-				    </ng-container>
-				  </ng-template>
+							<mat-header-cell *matHeaderCellDef> {{item}} </mat-header-cell>
+							<mat-cell *matCellDef="let element">{{element[item]}}</mat-cell>
+						</ng-container>
+					</ng-template>
 					<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    			<mat-row *matRowDef="let row; columns: displayedColumns;" 
-    			[ngClass]="{'booked' : row.Booked === 'Yes'}" (click)="onBookTime(row)"></mat-row>
+					<mat-row *matRowDef="let row; columns: displayedColumns;" 
+					[ngClass]="{'booked' : row.Booked === 'Yes'}" (click)="onBookTime(row)"></mat-row>
 				</mat-table> 
 			</div>
 

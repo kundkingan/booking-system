@@ -1,5 +1,5 @@
 /*
-	Test send handler 
+	Test send handler
 */
 
 class MockSendHandler {
@@ -34,19 +34,19 @@ let msgBook = {
 };
 
 describe('Test: SendHandler', () => {
-	let mockSendHandler; 
+	let mockSendHandler;
 	beforeEach(() => {
 		mockSendHandler = new MockSendHandler();
 	});
 	it('should equals login', () => {
-		expect(mockSendHandler.onMessage(msgLogin)).toEqual('login')
+		expect(mockSendHandler.onMessage(msgLogin)).toEqual('login');
 	});
 
 	it('should equals date', () => {
-		expect(mockSendHandler.onMessage(msgDate)).toEqual('date')
+		expect(mockSendHandler.onMessage(msgDate)).toEqual('date');
 	});
 
 	it('should equals book', () => {
-		expect(mockSendHandler.onMessage(msgBook)).toEqual('book')
+		expect(mockSendHandler.onMessage(msgBook)).toEqual('book');
 	});
 });
