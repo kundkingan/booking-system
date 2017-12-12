@@ -30,7 +30,7 @@ before_script:
 
 script:
   - node server/server.js &
-  - ng test
+  - ng test --cc
 
 after_success:
   - npm run codecov
