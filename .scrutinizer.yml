@@ -7,7 +7,7 @@ build:
     dependencies:
         before:
             - npm install -g @angular/cli@latest
-            - node server.js &
+            - node server/server.js &
 
     tests:
         override:

@@ -8,9 +8,10 @@ addons:
       - google-chrome-stable
 language: node_js
 
-# branches:
-#   only:
-#     - development
+branches:
+  only:
+    - dev
+    - master
 
 node_js:
   - "8"
@@ -30,7 +31,7 @@ before_script:
 
 script:
   - node server/server.js &
-  - ng test --cc
+  - ng test
 
 after_success:
   - npm run codecov
