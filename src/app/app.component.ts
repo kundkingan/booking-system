@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { DataService, SessionService } from './_services';
+import { Router, ActivatedRoute } from '@angular/router';
+import { DataService, SessionService, SocketService } from './_services';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +15,7 @@ export class AppComponent {
 	constructor(
 		private dataService: DataService,
 		private sessionService: SessionService,
+		private socketService: SocketService,
 		private router: Router) {
 		this.checklogin();
 		this.subscribeToSocket();
@@ -27,6 +28,11 @@ export class AppComponent {
 	}
 
 	subscribeToSocket() {
+
+		this.dataService.getOnOpen$.subscribe(data => {
+			this.socketService.send({ type: 'valid', id: this.userInfo.id, idToken: this.userInfo.idToken });
+		});
+
 		this.dataService.getOnMessage$.subscribe(data => {
 			console.log(data);
 
@@ -34,15 +40,24 @@ export class AppComponent {
 				case 'login':
 					this.handlelogin(data);
 					break;
+
+				case 'valid':
+					this.handleValidToken(data['valid']);
+					break;
+
 				case 'bookings':
 					this.handleSelectedDate(data);
 					break;
+
 				case 'user':
 					this.handleProfile(data);
 					break;
+
 				case 'userId':
-					this.sessionService.setIdToUserInfo(data['id']);
+					this.handleUserId(data);
+					
 					break;
+
 			}
 		});
 	}
@@ -51,7 +66,7 @@ export class AppComponent {
 		if (login['success']) {
 			this.sessionService.saveUserInfo({
 				loggedIn: true,
-				id: login['id'],
+				id: this.userInfo.id,
 				idToken: login['idToken'],
 				uid: login['uid'],
 				name: login['name']
@@ -62,12 +77,24 @@ export class AppComponent {
 		}
 	}
 
+	handleValidToken(valid) {
+		if (!valid) {
+			this.sessionService.unsetUserInfo();
+			this.router.navigate(['/login']);
+		}
+	}
+
 	handleSelectedDate(bookings) {
 		this.dataService.sendBookings(bookings);
 	}
 
 	handleProfile(profile) {
 		this.dataService.sendProfile(profile);
+	}
+
+	handleUserId(data) {
+		this.sessionService.setIdToUserInfo(data['id']);
+		
 	}
 
 }

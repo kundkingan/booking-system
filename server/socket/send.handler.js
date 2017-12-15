@@ -46,13 +46,20 @@ class SendHandler {
 	}
 
 	onMessage(message) {
+		console.log(message);
 		switch (message.type) {
 			case 'login':
 				this.handleSignIn(message.id, message.email, message.password);
 				break;
+
+			case 'valid':
+				this.handleCheckValidToken(message.id, message.idToken);
+				break;
+
 			case 'date':
 				this.handleGetSpecificDate(message.id, message.idToken, message.date);
 				break;
+
 			case 'book':
 				this.handleUpdateBookings(
 					message.id,
@@ -62,12 +69,14 @@ class SendHandler {
 					message.time,
 					message.name);
 				break;
+
 			case 'user':
 				this.handleGetUser(
 					message.id,
 					message.idToken,
 					message.uid);
 				break;
+
 			case 'cancel':
 				this.handleRemoveBooking(
 					message.id,
@@ -110,6 +119,18 @@ class SendHandler {
 				this.sendToClient(this.users[id], { type: 'login', success: false, errorMsg: error });
 			});
 		}
+	}
+
+	handleCheckValidToken(id, idToken) {
+		this.firebaseAuth.authToken(idToken)
+			.then(() => {
+				console.log('valid')
+				this.sendToClient(this.users[id], { type: 'valid', valid: true })
+			})
+			.catch((error) => {
+				console.log('invalid')
+				this.sendToClient(this.users[id], { type: 'valid', valid: false })
+			});
 	}
 
 	handleGetSpecificDate(id, idToken, date) {
@@ -189,10 +210,10 @@ class SendHandler {
 			.then(() => {
 				FirebaseHandler.removeUserBooking(uid, date)
 					.then(() => {
-						this.sendToClient(this.users[id], type: 'cancel', success: true)
+						this.sendToClient(this.users[id], { type: 'cancel', success: true })
 					})
 					.catch((error) => {
-						this.sendToClient(this.users[id], type: 'cancel', success: false)
+						this.sendToClient(this.users[id], { type: 'cancel', success: false })
 						console.log('error : removeBooking')
 					});
 

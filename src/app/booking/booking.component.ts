@@ -17,6 +17,7 @@ export class BookingComponent {
 	chosenDate;
 	displayedColumns = ['Time', 'Booked', 'By'];
 	dataSource = new MatTableDataSource(this.bookings.element_data);
+	dayAlreadyBooked = false;
 
 	constructor(
 		private dataService: DataService,
@@ -26,7 +27,16 @@ export class BookingComponent {
 		private router: Router) 
 	{
 		this.dataService.getBookings$.subscribe(bookings => {
-			if (this.chosenDate === bookings['date']) { this.bookings.insertData(bookings['bookings']); }
+			if (this.chosenDate === bookings['date']) { 
+				this.bookings.insertData(bookings['bookings']);
+				this.dayAlreadyBooked = false;
+				for (let booking of this.bookings.element_data) {
+					if (booking['By'] === this.userInfo.name) {
+						this.dayAlreadyBooked = true;
+						break;
+					}
+				}
+			}
 		});
 	}
 
@@ -42,7 +52,7 @@ export class BookingComponent {
 	}
 
 	onBookTime(selectedTime) {
-		if (selectedTime.Booked === 'No') {
+		if (selectedTime.Booked === 'No' && !this.dayAlreadyBooked) {
 			this.socketService.send({
 				type: 'book',
 				id:  this.userInfo.id,

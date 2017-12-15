@@ -50,7 +50,7 @@ class FirebaseHandler {
 	updateUserBooking(uid, date, time) {
 		return this.database.ref('users')
 			.child(uid).child('bookings').child(date)
-			.set({ date: date, time: time })
+			.set({ date: date, time: time , active: true})
 			.catch((error) => {
 				console.log('error book');
 				throw error;
