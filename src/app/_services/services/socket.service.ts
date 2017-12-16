@@ -12,18 +12,18 @@ export class SocketService {
 	constructor(private dataService: DataService) {
 		this.socket = new WebSocket(URL, 'json');
 
-    this.socket.onopen = event => {
-    	this.open = true;
-      this.dataService.sendOnOpen(event);
-    };
-    
-    this.socket.onmessage = event => {
-      this.dataService.sendOnMessage(JSON.parse(event.data));
-    };
+		this.socket.onopen = event => {
+			this.open = true;
+			this.dataService.sendOnOpen(event);
+		};
+		
+		this.socket.onmessage = event => {
+			this.dataService.sendOnMessage(JSON.parse(event.data));
+		};
 
-    this.socket.onclose = event => {
-    	this.open = false;
-    }
+		this.socket.onclose = event => {
+			this.open = false;
+		}
 	}
 
 	send(data) {
@@ -31,7 +31,7 @@ export class SocketService {
 	}
 
 	close() {
-	  this.socket.close();
+		this.socket.close();
 	}
 
 }

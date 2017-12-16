@@ -4,6 +4,7 @@ let firebaseConfig = require('../firebase/firebase.config.json');
 let serviceAccount = require('../firebase/firebase.service-key.json');
 
 class SendHandler {
+	
 	constructor(webSocketServer, webSocket) {
 		this.wss = webSocketServer;
 		this.webSocket = webSocket;
@@ -211,21 +212,20 @@ class SendHandler {
 				FirebaseHandler.removeUserBooking(uid, date)
 					.then(() => {
 						this.sendToClient(this.users[id], { type: 'cancel', success: true })
+						FirebaseHandler.removeBooking(date, time)
+							.then((res) => {
+								this.sendToClients({
+									type: 'bookings',
+									date: date,
+									bookings: res ? [res] : []
+								});
+							})
+							.catch((error) => {
+								console.log('error : removeBooking')
+							});
 					})
 					.catch((error) => {
 						this.sendToClient(this.users[id], { type: 'cancel', success: false })
-						console.log('error : removeBooking')
-					});
-
-				FirebaseHandler.removeBooking(date, time)
-					.then((res) => {
-						this.sendToClients({
-							type: 'bookings',
-							date: date,
-							bookings: res ? [res] : []
-						});
-					})
-					.catch((error) => {
 						console.log('error : removeBooking')
 					});
 			})

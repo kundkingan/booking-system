@@ -12,13 +12,13 @@ import { Bookings } from './booking.interface';
 })
 export class BookingComponent {
 	
-	private userInfo = this.sessionService.getUserInfo();
-
 	chosenDate;
 	displayedColumns = ['Time', 'Booked', 'By'];
 	dataSource = new MatTableDataSource(this.bookings.element_data);
 	dayAlreadyBooked = false;
 
+	private userInfo = this.sessionService.getUserInfo();
+	
 	constructor(
 		private dataService: DataService,
 		private socketService: SocketService,
@@ -67,6 +67,11 @@ export class BookingComponent {
 
 	onUserProfile() {
 		this.router.navigate(['/profile']);
+	}
+
+	onLogout() {
+		this.sessionService.unsetUserInfo();
+		this.router.navigate(['/login']);
 	}
 
 }

@@ -13,6 +13,7 @@ export class ProfileComponent {
 	user = this.sessionService.getUserInfo();
 
 	private currentDate = new Date();
+	private canceledDate;
 
 	constructor(
 		private sessionService: SessionService, 
@@ -37,6 +38,15 @@ export class ProfileComponent {
 				this.bookings.push(data['bookings'][date])
 			}
 		});
+
+		this.dataService.getCancel$.subscribe(data => {
+			for (let i = 0; i < this.bookings.length; i++) {
+				if (this.bookings[i].date === this.canceledDate) {
+					this.bookings.splice(i, 1);
+					break;
+				}
+			}
+		});
 	}
 
 	onBack() {
@@ -49,6 +59,7 @@ export class ProfileComponent {
 	}
 
 	onCancel(date, time) {
+		this.canceledDate = date;
 		this.socketService.send({
 			type: 'cancel',
 			id: this.user.id,
@@ -60,7 +71,7 @@ export class ProfileComponent {
 	}
 
 
-	fetchProfile() {
+	private fetchProfile() {
 		this.socketService.send({
 			type: 'user',
 			id: this.user.id,

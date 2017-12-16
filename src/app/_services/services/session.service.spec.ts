@@ -2,23 +2,66 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { SessionService } from './session.service';
 
-class MockSessionService {
-  initUserInfo() {
-    return true;
-  }
-}
-
 describe('Test: SessionService', () => {
-	let mockSessionService;
+  let sessionService;
   beforeEach(() => {
-  	mockSessionService = new MockSessionService();
-    // TestBed.configureTestingModule({
-    //   providers: [{provide: SessionService, useValue: SessionServiceStub }]
-    // });
+    sessionService = new SessionService();
+    localStorage.clear();
   });
-
 
   it('should get true', () => {
-    expect(mockSessionService.initUserInfo()).toEqual(true);
+    expect(sessionService.initUserInfo()).toEqual(true);
   });
+
+  it('should get false', () => {
+    sessionService.saveUserInfo({
+      loggedIn: true,
+      id: 123,
+      idToken: '123',
+      uid: '123',
+      name: '123' 
+    });
+    expect(sessionService.initUserInfo()).toEqual(false);
+  });
+
+  it('should get true', () => {
+    let id = 0;
+
+    sessionService.saveUserInfo({
+      loggedIn: true,
+      id: 123,
+      idToken: '123',
+      uid: '123',
+      name: '123' 
+    });
+
+    sessionService.setIdToUserInfo(id);
+
+    let user = sessionService.getUserInfo();
+
+    expect(user.id).toBe(id);
+  });
+
+  it('should get no user', () => {
+    let obj = {
+      loggedIn: false,
+      id: null,
+      idToken: null,
+      uid: null,
+      name: null
+    };
+
+    sessionService.saveUserInfo({
+      loggedIn: true,
+      id: 123,
+      idToken: '123',
+      uid: '123',
+      name: '123' 
+    });
+
+    sessionService.unsetUserInfo();
+
+    expect(sessionService.getUserInfo()).toEqual(obj);
+  });
+
 });

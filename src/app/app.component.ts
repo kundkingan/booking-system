@@ -55,6 +55,10 @@ export class AppComponent {
 
 				case 'userId':
 					this.handleUserId(data);
+					break;
+
+				case 'cancel':
+					this.handleCancel(data);
 					
 					break;
 
@@ -94,7 +98,10 @@ export class AppComponent {
 
 	handleUserId(data) {
 		this.sessionService.setIdToUserInfo(data['id']);
-		
+	}
+
+	handleCancel(data) {
+		this.dataService.sendCancel(data);
 	}
 
 }
