@@ -20,11 +20,11 @@ export class BookingComponent {
 	private userInfo = this.sessionService.getUserInfo();
 	
 	constructor(
-		private dataService: DataService,
-		private socketService: SocketService,
 		private sessionService: SessionService,
+		private socketService: SocketService,
+		private dataService: DataService,
 		private bookings: Bookings,
-		private router: Router) 
+		private router?: Router) 
 	{
 		this.dataService.getBookings$.subscribe(bookings => {
 			if (this.chosenDate === bookings['date']) { 

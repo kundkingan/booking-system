@@ -9,7 +9,7 @@
 		"lint": "ng lint",
 		"e2e": "ng e2e",
 		"coverage": "ng test -cc",
-		"codecov": "codecov --token=14bc8c43-51f4-45ed-9edd-7b6d1ff8d891"
+		"codecov": "codecov --token=5a099186-46f4-4015-be90-45b875a2660a"
 	},
 	"private": true,
 	"dependencies": {

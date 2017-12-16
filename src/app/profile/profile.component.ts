@@ -19,7 +19,7 @@ export class ProfileComponent {
 		private sessionService: SessionService, 
 		private socketService: SocketService,
 		private dataService: DataService,
-		private router: Router) 
+		private router?: Router) 
 	{
 		this.currentDate.setHours(1);
 		this.currentDate.toISOString().split('T')[0];
