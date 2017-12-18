@@ -69,7 +69,6 @@ export class ProfileComponent {
 		});
 	}
 
-
 	private fetchProfile() {
 		this.socketService.send({
 			type: 'user',

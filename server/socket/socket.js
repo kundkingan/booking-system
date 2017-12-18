@@ -20,8 +20,7 @@ module.exports = (server) => {
 				data = JSON.parse(data);
 				sendHandler.onMessage(data);
 			} catch (e) {
-				//**TODO FIX **/
-					console.log('error');
+				console.log('error in message');
 			}
 		});
 

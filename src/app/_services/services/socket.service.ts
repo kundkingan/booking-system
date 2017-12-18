@@ -22,6 +22,7 @@ export class SocketService {
 		};
 
 		this.socket.onclose = event => {
+			this.dataService.sendSocketDown(true);
 			this.open = false;
 		};
 	}

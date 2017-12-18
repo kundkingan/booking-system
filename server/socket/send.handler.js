@@ -47,7 +47,6 @@ class SendHandler {
 	}
 
 	onMessage(message) {
-		console.log(message);
 		switch (message.type) {
 			case 'login':
 				this.handleSignIn(message.id, message.email, message.password);

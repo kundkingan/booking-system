@@ -10,6 +10,7 @@ export class DataService {
   private getBookingsSource = new Subject<string>();
   private getProfileSource = new Subject<object>();
   private getCancelSource = new Subject<object>();
+  private getSocketDownSource = new Subject<object>();
 
   getOnOpen$ = this.getOnOpenSource.asObservable();
   getOnMessage$ = this.getOnMessageSource.asObservable();
@@ -17,6 +18,7 @@ export class DataService {
   getBookings$ = this.getBookingsSource.asObservable();
   getProfile$ = this.getProfileSource.asObservable();
   getCancel$ = this.getCancelSource.asObservable();
+  getSocketdown$ = this.getSocketDownSource.asObservable();
 
   sendOnOpen(data) {
     this.getOnOpenSource.next(data);
@@ -40,6 +42,10 @@ export class DataService {
 
   sendCancel(data) {
     this.getCancelSource.next(data);
+  }
+
+  sendSocketDown(data) {
+    this.getSocketDownSource.next(data);
   }
 
 }
