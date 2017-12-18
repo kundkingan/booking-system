@@ -28,9 +28,10 @@ export class AppComponent {
 	}
 
 	subscribeToSocket() {
-
 		this.dataService.getOnOpen$.subscribe(data => {
-			this.socketService.send({ type: 'valid', id: this.userInfo.id, idToken: this.userInfo.idToken });
+			if (this.userInfo.id) {
+				this.socketService.send({ type: 'valid', id: this.userInfo.id, idToken: this.userInfo.idToken });
+			}
 		});
 
 		this.dataService.getOnMessage$.subscribe(data => {
@@ -59,10 +60,13 @@ export class AppComponent {
 
 				case 'cancel':
 					this.handleCancel(data);
-
 					break;
-
 			}
+		});
+
+		this.dataService.getSocketdown$.subscribe(data => {
+			this.sessionService.unsetUserInfo();
+			this.router.navigate(['/login']);
 		});
 	}
 

@@ -51,4 +51,11 @@ describe('Test: DataService', () => {
     dataService.sendCancel('6');
   });
 
+  it('should get true', () => {
+    dataService.getSocketDown$.subscribe(data => {
+      expect(data).toEqual('7');
+    });
+    dataService.sendCancel('7');
+  });
+
 });
