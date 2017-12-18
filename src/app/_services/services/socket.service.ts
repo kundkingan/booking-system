@@ -2,7 +2,8 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { DataService } from './data.service';
 
-const URL = 'ws://localhost:3000/';
+// const URL = 'ws://localhost:3000/';
+const URL = location.origin.replace(/^http/, 'ws'); // HEROKU
 
 @Injectable()
 export class SocketService {

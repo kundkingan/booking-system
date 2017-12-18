@@ -7,7 +7,7 @@
 		"build": "ng build",
 		"test": "ng test",
 		"lint": "ng lint",
-		"e2e": "ng e2e",
+		"postinstall": "ng build --aot -prod",
 		"coverage": "ng test -cc",
 		"codecov": "codecov --token=5a099186-46f4-4015-be90-45b875a2660a",
 		"travis": "ng test --cc --browsers PhantomJS",
@@ -19,6 +19,7 @@
 	},
 	"private": true,
 	"dependencies": {
+		"@angular/cli": "1.6.0",
 		"@angular/animations": "5.1.0",
 		"@angular/cdk": "5.0.0",
 		"@angular/common": "5.1.0",
@@ -41,7 +42,6 @@
 		"zone.js": "0.8.18"
 	},
 	"devDependencies": {
-		"@angular/cli": "1.6.0",
 		"@angular/compiler-cli": "^5.1.0",
 		"@angular/language-service": "^5.0.0",
 		"@types/jasmine": "~2.8.2",
