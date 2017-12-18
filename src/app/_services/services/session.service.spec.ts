@@ -24,7 +24,7 @@ describe('Test: SessionService', () => {
     expect(sessionService.initUserInfo()).toEqual(false);
   });
 
-  it('should get true', () => {
+  it('should get same userId', () => {
     const id = 0;
 
     sessionService.saveUserInfo({

@@ -64,7 +64,7 @@ export class AppComponent {
 			}
 		});
 
-		this.dataService.getSocketdown$.subscribe(data => {
+		this.dataService.getSocketDown$.subscribe(data => {
 			this.sessionService.unsetUserInfo();
 			this.router.navigate(['/login']);
 		});

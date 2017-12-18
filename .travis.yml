@@ -14,7 +14,7 @@ branches:
     - master
 
 node_js:
-  - "8"
+  - "9"
   - "node"
 
 before_install:
@@ -31,7 +31,7 @@ before_script:
 
 script:
   - node server/server.js &
-  - ng test
+  - npm run travis
 
 after_success:
   - npm run codecov

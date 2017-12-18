@@ -18,7 +18,7 @@ export class DataService {
   getBookings$ = this.getBookingsSource.asObservable();
   getProfile$ = this.getProfileSource.asObservable();
   getCancel$ = this.getCancelSource.asObservable();
-  getSocketdown$ = this.getSocketDownSource.asObservable();
+  getSocketDown$ = this.getSocketDownSource.asObservable();
 
   sendOnOpen(data) {
     this.getOnOpenSource.next(data);

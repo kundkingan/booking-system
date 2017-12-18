@@ -10,6 +10,7 @@
 		"e2e": "ng e2e",
 		"coverage": "ng test -cc",
 		"codecov": "codecov --token=5a099186-46f4-4015-be90-45b875a2660a",
+		"travis": "ng test --cc --browsers PhantomJS",
 		"start-docker": "docker-compose run -d server",
 		"stop-docker": "docker-compose stop",
 		"docker-test-latest": "karma start --cc --browsers PhantomJS",
