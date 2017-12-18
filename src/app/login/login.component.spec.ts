@@ -33,7 +33,7 @@ describe('LoginComponent', () => {
 	});
 
 	it('bothInputValid should return true', () => {
-		loginComponent.email = '123@123.123'
+		loginComponent.email = '123@123.123';
 		loginComponent.password = '123456';
 		expect(loginComponent.bothInputValid()).toBe(true);
 	});

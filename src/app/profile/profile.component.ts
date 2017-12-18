@@ -16,11 +16,10 @@ export class ProfileComponent {
 	private canceledDate;
 
 	constructor(
-		private sessionService: SessionService, 
+		private sessionService: SessionService,
 		private socketService: SocketService,
 		private dataService: DataService,
-		private router?: Router) 
-	{
+		private router?: Router) {
 		this.currentDate.setHours(1);
 		this.currentDate.toISOString().split('T')[0];
 
@@ -31,11 +30,11 @@ export class ProfileComponent {
 		} else {
 			this.fetchProfile();
 		}
-		
+
 		this.dataService.getProfile$.subscribe(data => {
-			for (let date in data['bookings']) {
+			for (const date in data['bookings']) {
 				data['bookings'][date]['passedDate'] = new Date(date) >= this.currentDate ? true : false;
-				this.bookings.push(data['bookings'][date])
+				this.bookings.push(data['bookings'][date]);
 			}
 		});
 

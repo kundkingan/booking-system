@@ -59,7 +59,7 @@ export class AppComponent {
 
 				case 'cancel':
 					this.handleCancel(data);
-					
+
 					break;
 
 			}

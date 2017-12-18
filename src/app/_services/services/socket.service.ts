@@ -16,14 +16,14 @@ export class SocketService {
 			this.open = true;
 			this.dataService.sendOnOpen(event);
 		};
-		
+
 		this.socket.onmessage = event => {
 			this.dataService.sendOnMessage(JSON.parse(event.data));
 		};
 
 		this.socket.onclose = event => {
 			this.open = false;
-		}
+		};
 	}
 
 	send(data) {

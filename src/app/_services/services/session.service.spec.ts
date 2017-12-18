@@ -19,31 +19,31 @@ describe('Test: SessionService', () => {
       id: 123,
       idToken: '123',
       uid: '123',
-      name: '123' 
+      name: '123'
     });
     expect(sessionService.initUserInfo()).toEqual(false);
   });
 
   it('should get true', () => {
-    let id = 0;
+    const id = 0;
 
     sessionService.saveUserInfo({
       loggedIn: true,
       id: 123,
       idToken: '123',
       uid: '123',
-      name: '123' 
+      name: '123'
     });
 
     sessionService.setIdToUserInfo(id);
 
-    let user = sessionService.getUserInfo();
+    const user = sessionService.getUserInfo();
 
     expect(user.id).toBe(id);
   });
 
   it('should get no user', () => {
-    let obj = {
+    const obj = {
       loggedIn: false,
       id: null,
       idToken: null,
@@ -56,7 +56,7 @@ describe('Test: SessionService', () => {
       id: 123,
       idToken: '123',
       uid: '123',
-      name: '123' 
+      name: '123'
     });
 
     sessionService.unsetUserInfo();

@@ -17,7 +17,7 @@ describe('BookingComponent', () => {
 	});
 
 	it('getBookings should set dayAlreadyBooked to false', () => {
-		let data = {
+		const data = {
 			date: '2017-12-12',
 			bookings: [
 				{
@@ -39,7 +39,7 @@ describe('BookingComponent', () => {
 					}
 				}
 			]
-		}
+		};
 		// bookings.insertData(data);
 
 		// for (const booked of data['bookings']) {
@@ -51,7 +51,7 @@ describe('BookingComponent', () => {
 	});
 
 	it('onChangeDate should set chosenDate and send to socketService', () => {
-		let event = {value: new Date()}
+		const event = {value: new Date()};
 
 		bookingComponent.onChangeDate(event);
 		event.value.setSeconds(3600);

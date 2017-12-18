@@ -19,8 +19,7 @@ export class LoginComponent implements OnInit {
     private sessionService: SessionService,
     private socketService: SocketService,
     private dataService: DataService,
-    private router?: Router) 
-  {
+    private router?: Router) {
     this.dataService.getOnLoginFail$.subscribe(errorMsg => {
       this.errorMsg = errorMsg;
       this.spinner = false;

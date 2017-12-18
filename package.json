@@ -9,7 +9,12 @@
 		"lint": "ng lint",
 		"e2e": "ng e2e",
 		"coverage": "ng test -cc",
-		"codecov": "codecov --token=5a099186-46f4-4015-be90-45b875a2660a"
+		"codecov": "codecov --token=5a099186-46f4-4015-be90-45b875a2660a",
+		"start-docker": "docker-compose run -d server",
+		"stop-docker": "docker-compose stop",
+		"docker-test-latest": "karma start --cc --browsers PhantomJS",
+		"docker-test-9": "karma start --cc --browsers PhantomJS",
+		"docker-test-8": "karma start --cc --browsers PhantomJS"
 	},
 	"private": true,
 	"dependencies": {
@@ -50,6 +55,7 @@
 		"karma-coverage-istanbul-reporter": "^1.2.1",
 		"karma-jasmine": "~1.1.0",
 		"karma-jasmine-html-reporter": "^0.2.2",
+		"karma-phantomjs-launcher": "^1.0.4",
 		"protractor": "^5.2.1",
 		"ts-node": "~3.3.0",
 		"tslint": "~5.8.0",

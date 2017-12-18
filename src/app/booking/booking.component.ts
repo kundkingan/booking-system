@@ -11,26 +11,25 @@ import { Bookings } from './booking.interface';
 	providers: [Bookings]
 })
 export class BookingComponent {
-	
+
 	chosenDate;
 	displayedColumns = ['Time', 'Booked', 'By'];
 	dataSource = new MatTableDataSource(this.bookings.element_data);
 	dayAlreadyBooked = false;
 
 	private userInfo = this.sessionService.getUserInfo();
-	
+
 	constructor(
 		private sessionService: SessionService,
 		private socketService: SocketService,
 		private dataService: DataService,
 		private bookings: Bookings,
-		private router?: Router) 
-	{
+		private router?: Router) {
 		this.dataService.getBookings$.subscribe(bookings => {
-			if (this.chosenDate === bookings['date']) { 
+			if (this.chosenDate === bookings['date']) {
 				this.bookings.insertData(bookings['bookings']);
 				this.dayAlreadyBooked = false;
-				for (let booking of this.bookings.element_data) {
+				for (const booking of this.bookings.element_data) {
 					if (booking['By'] === this.userInfo.name) {
 						this.dayAlreadyBooked = true;
 						break;

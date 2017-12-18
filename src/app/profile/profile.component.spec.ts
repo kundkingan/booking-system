@@ -14,7 +14,7 @@ describe('ProfileComponent', () => {
   });
 
   it('should assign cancledDate', () => {
-  	profileComponent.onCancel('123','123');
+  	profileComponent.onCancel('123', '123');
 
 		expect(profileComponent.canceledDate).toBe('123');
 	});
@@ -28,7 +28,7 @@ describe('ProfileComponent', () => {
 	});
 
 	it('should test if bookings is added', () => {
-		let data = {
+		const data = {
 			bookings: {
 				'2017-12-16': {
 	  			active: true,
@@ -41,9 +41,9 @@ describe('ProfileComponent', () => {
 					time: '07:00 - 11:00',
 	  		}
 			}
-		}
-  	dataService.sendProfile(data)
-  	expect(profileComponent.bookings[0]).toEqual(data['bookings']['2017-12-16'])
+		};
+  	dataService.sendProfile(data);
+  	expect(profileComponent.bookings[0]).toEqual(data['bookings']['2017-12-16']);
 	});
 
 	it('should remove a date from bookings if canceled', () => {
@@ -54,7 +54,7 @@ describe('ProfileComponent', () => {
 		];
 		profileComponent.canceledDate = '123';
 
-  	dataService.sendCancel('123')
+  	dataService.sendCancel('123');
 	});
 
 });
