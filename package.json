@@ -3,7 +3,7 @@
 	"version": "0.0.0",
 	"license": "MIT",
 	"scripts": {
-		"start": "node server/server.js",
+		"start": "node server/server.js $PORT",
 		"build": "ng build",
 		"test": "ng test",
 		"lint": "ng lint",

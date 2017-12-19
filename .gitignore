@@ -45,5 +45,5 @@ Thumbs.db
 
 
 # Firebase config
-/server/firebase/firebase.service-key.json
-/server/firebase/firebase.config.json
+# /server/firebase/firebase.service-key.json
+# /server/firebase/firebase.config.json
