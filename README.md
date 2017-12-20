@@ -19,7 +19,7 @@ $ npm install
 $ npm start
 ```
 
-Navigate to `localhost:3000`
+Navigate to `http://localhost:3000`
 
 ## Development server
 
@@ -31,28 +31,31 @@ Angular cli
 
 Run `npm start` to start backend server on port 3030. You can change server port with environment variable. 
 
-`PORT=8080 npm start`
+`$ PORT=8080 npm start`
 
 If you changed port, you also have to change the port manually for frontend.
 Navigate to `src/app/_services/services/socket.service.ts`
 
-And change line 5 `const URL = 'ws://localhost:3000/'`
+On line 5 change 
+
+`const URL = 'ws://localhost:3000/'`
+
 To the port your server is running on
 
 ### Start frontend
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `$ ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Build project
 
-Run `ng build` to build the project. The build artifacts will be stored in the `server/dist/` directory. Use the `-prod` flag for a production build.
+Run `$ ng build` to build the project. The build artifacts will be stored in the `server/dist/` directory. Use the `-prod` flag for a production build.
 
 ## Running tests
 
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-If you want to use the chrome browser for test run `ng test --single-run false`
+Use the  `--single-run false` flag for no single run.
 
 ## Docker
 
@@ -78,9 +81,13 @@ npm run docker-test-latest
 ## CI
 
 Scrutinizer for build status and code coverage
+
 Travis for build status
+
 Codecov for code coverage
+
 Codeclimate for code quality
+
 
 ## Realtime
 
