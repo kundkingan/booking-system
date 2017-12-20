@@ -36,7 +36,7 @@ class SendHandler {
 	}
 
 	onClose(ws, code, reason) {
-		this.sendToClients({type: 'close', clients: this.wss.clients.size});
+		this.sendToClients({ type: 'close', clients: this.wss.clients.size });
 		for (let i = 0; i < this.users.length; i++) {
 			if (this.users[i] === ws) {
 				this.users.splice(i, 1, null);
@@ -152,7 +152,6 @@ class SendHandler {
 			});
 		})
 		.catch((error) => {
-			/* TODO Hantera expired IDTOKEN */
 			console.log('error : authToken');
 		});
 	}
@@ -175,7 +174,6 @@ class SendHandler {
 			});
 		})
 		.catch((error) => {
-			/* TODO Hantera expired IDTOKEN */
 			console.log('error : authToken');
 		});
 	}

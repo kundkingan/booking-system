@@ -4,10 +4,10 @@
 	"license": "MIT",
 	"scripts": {
 		"start": "node server/server.js $PORT",
-		"build": "ng build",
-		"test": "ng test",
-		"lint": "ng lint",
 		"postinstall": "ng build --aot -prod",
+		"build": "ng build",
+		"lint": "ng lint",
+		"test": "ng test",
 		"coverage": "ng test -cc",
 		"codecov": "codecov --token=5a099186-46f4-4015-be90-45b875a2660a",
 		"travis": "ng test --cc --browsers PhantomJS",
@@ -33,7 +33,6 @@
 		"@angular/platform-browser": "5.1.0",
 		"@angular/platform-browser-dynamic": "5.1.0",
 		"@angular/router": "5.1.0",
-		"axios": "^0.17.1",
 		"core-js": "2.5.1",
 		"firebase": "^4.8.0",
 		"firebase-admin": "^5.5.1",
@@ -60,6 +59,6 @@
 		"protractor": "^5.2.1",
 		"ts-node": "~3.3.0",
 		"tslint": "~5.8.0",
-		"typescript": "^2.4.2"
+		"typescript": "^2.5.0"
 	}
 }

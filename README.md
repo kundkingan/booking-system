@@ -9,18 +9,23 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0.
 
+## About
+
 ## Installation
 
-```
-git clone https://github.com/kundkingan/booking-system.git
+```bash
+$ git clone https://github.com/kundkingan/booking-system.git
+$ npm install
+$ npm start
 ```
 
-```
-npm start
-```
+Navigate to `localhost:3000`
 
 ## Development server
 
+### Requirements
+
+Angular cli
 
 ### Start backend
 
@@ -38,15 +43,44 @@ To the port your server is running on
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Build
+## Build project
 
 Run `ng build` to build the project. The build artifacts will be stored in the `server/dist/` directory. Use the `-prod` flag for a production build.
 
-## Running unit tests
+## Running tests
+
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
+If you want to use the chrome browser for test run `ng test --single-run false`
+
+## Docker
+
+### Running tests
+
+You can run 3 different test within the docker containers that contains the different node versions, then execute the following:
+
+```bash
+# Build images
+npm run docker-build
+
+# Node v8
+npm run docker-test-8
+
+# Node v9
+npm run docker-test-9
+
+# Node latest
+npm run docker-test-latest
+```
+
+
 ## CI
+
+Scrutinizer for build status and code coverage
+Travis for build status
+Codecov for code coverage
+Codeclimate for code quality
 
 ## Realtime
 
