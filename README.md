@@ -1,11 +1,11 @@
 # Booking-system
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/58920c3afec03c58e431/maintainability)](https://codeclimate.com/github/kundkingan/booking-system/maintainability)
-[![codecov](https://codecov.io/gh/kundkingan/booking-system/branch/master/graph/badge.svg)](https://codecov.io/gh/kundkingan/booking-system)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kundkingan/booking-system/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/kundkingan/booking-system/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/kundkingan/booking-system/badges/build.png?b=master)](https://scrutinizer-ci.com/g/kundkingan/booking-system/build-status/master)
-[![Code Coverage](https://scrutinizer-ci.com/g/kundkingan/booking-system/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/kundkingan/booking-system/?branch=master)
 [![Build Status](https://travis-ci.org/kundkingan/booking-system.svg?branch=dev)](https://travis-ci.org/kundkingan/booking-system)
+[![Build Status](https://scrutinizer-ci.com/g/kundkingan/booking-system/badges/build.png?b=master)](https://scrutinizer-ci.com/g/kundkingan/booking-system/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kundkingan/booking-system/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/kundkingan/booking-system/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/kundkingan/booking-system/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/kundkingan/booking-system/?branch=master)
+[![codecov](https://codecov.io/gh/kundkingan/booking-system/branch/master/graph/badge.svg)](https://codecov.io/gh/kundkingan/booking-system)
+[![Maintainability](https://api.codeclimate.com/v1/badges/58920c3afec03c58e431/maintainability)](https://codeclimate.com/github/kundkingan/booking-system/maintainability)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0.
 
@@ -21,7 +21,7 @@ $ npm start
 
 Navigate to `http://localhost:3000`
 
-## Development server
+## Development
 
 ### Requirements
 
@@ -29,29 +29,27 @@ Angular cli
 
 ### Start backend
 
-Run `npm start` to start backend server on port 3030. You can change server port with environment variable. 
+Run `$ npm start` to start backend server on port 3000.  
 
-`$ PORT=8080 npm start`
+Run `$ ng serve` to start frontend server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-If you changed port, you also have to change the port manually for frontend.
+You can change server port with environment variable. e.g `$ PORT=8080 npm start`
+
+If you changed the server port, you have to manually change the port for frontend.
+
 Navigate to `src/app/_services/services/socket.service.ts`
 
-On line 5 change 
+On line 5 change, to the port you choose for the server.
 
 `const URL = 'ws://localhost:3000/'`
 
-To the port your server is running on
-
 ### Start frontend
-
-Run `$ ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Build project
 
 Run `$ ng build` to build the project. The build artifacts will be stored in the `server/dist/` directory. Use the `-prod` flag for a production build.
 
 ## Running tests
-
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
@@ -77,20 +75,37 @@ npm run docker-test-9
 npm run docker-test-latest
 ```
 
-
 ## CI
 
-Scrutinizer for build status and code coverage
+[![Build Status](https://scrutinizer-ci.com/g/kundkingan/booking-system/badges/build.png?b=master)](https://scrutinizer-ci.com/g/kundkingan/booking-system/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kundkingan/booking-system/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/kundkingan/booking-system/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/kundkingan/booking-system/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/kundkingan/booking-system/?branch=master)
+Scrutinizer is used for build status, code coverage and code quaility. 
 
+[![Build Status](https://travis-ci.org/kundkingan/booking-system.svg?branch=dev)](https://travis-ci.org/kundkingan/booking-system)
 Travis for build status
 
+[![codecov](https://codecov.io/gh/kundkingan/booking-system/branch/master/graph/badge.svg)](https://codecov.io/gh/kundkingan/booking-system)
 Codecov for code coverage
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/58920c3afec03c58e431/maintainability)](https://codeclimate.com/github/kundkingan/booking-system/maintainability)
 Codeclimate for code quality
 
+I choose to use two different tools for each area e.g build status, code coverage and code quaility. This is because I'm not a super fan of 
+Scruitinizer but I like that they got everything you need in for your CI. I choose to not only use Scrutinizer and instead use additional tools evaluate my code. This is because I think it's good to get to know not only one tool but multiple to gain more knowledge and experience and also to see what's the difference between the results. Mostly the use of additional tools is also because I really don't like the design of Scrutinizer website and is more a fan of Travis, Codecov and Codeclimate, they feel more modern than Scrutinizer.
 
 ## Realtime
 
+Realtime is used for communications between frontend and backend. This is done by having the backend server running a [Websocket module](https://www.npmjs.com/package/ws) to achieve the realtime functionality. 
+
 ## Database
 
+For storage I use Firebase [Firebase](https://firebase.google.com/). The storage is used to store data about the user and bookings done by the user. 
+
+The data is stored in two "tables", users and bookings. The choice to have two tables is to make it easier to handle a users bookings and display them on their profile page. This could also been achieved with one table with only bookings with a id of the user that booked a time. But with that method I would be required to filter the list of bookings to find a specific user bookings. I choose to priorties the performance of the server since it would be decreased incase there is alot of bookings and there is multiple users requesting their bookings. In the user table I store all their bookings so they can see a history of their recent bookings. 
+
+Since Firebase is using a no-sql database I still think that regular relationship database is good to use. In this case I can divide my data into to tables and then get the data I want with one query. But if there is alot of data with many relations e.g a web shop, I think that a relationship database is better. Then you can query the result you want so you don't filter the result in your backend. The database will have to handle many queries but they are built to handle many queries. But for smaller projects I like to use a no-sql database like Firebase because it's so easy to use and very modern.
+
 ## Own module
+
+[Firebase-auth-node](https://www.npmjs.com/package/firebase-auth-node) is a module that is used to authenticate the user through [Firebase](https://firebase.google.com/) own authentication method with email and password.
