@@ -9,8 +9,6 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0.
 
-## About
-
 ## Installation
 
 ```bash
@@ -25,7 +23,7 @@ Navigate to `http://localhost:3000`
 
 ### Requirements
 
-Angular cli
+[Angular CLI](https://github.com/angular/angular-cli). How to install and use it is found there.
 
 ### Start backend
 
@@ -74,7 +72,10 @@ npm run docker-test-9
 npm run docker-test-latest
 ```
 
-## CI
+
+## About
+
+### CI
 
 [![Build Status](https://scrutinizer-ci.com/g/kundkingan/booking-system/badges/build.png?b=master)](https://scrutinizer-ci.com/g/kundkingan/booking-system/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kundkingan/booking-system/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/kundkingan/booking-system/?branch=master)
@@ -93,11 +94,11 @@ Codeclimate for code quality
 I choose to use two different tools for each area e.g build status, code coverage and code quaility. This is because I'm not a super fan of 
 Scruitinizer but I like that they got everything you need in for your CI. I choose to not only use Scrutinizer and instead use additional tools evaluate my code. This is because I think it's good to get to know not only one tool but multiple to gain more knowledge and experience and also to see what's the difference between the results. Mostly the use of additional tools is also because I really don't like the design of Scrutinizer website and is more a fan of Travis, Codecov and Codeclimate, they feel more modern than Scrutinizer.
 
-## Realtime
+### Realtime
 
 Realtime is used for communications between frontend and backend. This is done by having the backend server running a [Websocket module](https://www.npmjs.com/package/ws) to achieve the realtime functionality. Every request made from frontend is sent with a websocket. This technique is really easy and flexible to use because it's possible to send JSON objects between frontend and backend. This makes it easy to filter what kind of message/request that is coming to the receiver.
 
-## Database
+### Database
 
 For storage I use Firebase [Firebase](https://firebase.google.com/). The storage is used to store data about the user and bookings done by the user. 
 
@@ -105,7 +106,7 @@ The data is stored in two "tables", users and bookings. The choice to have two t
 
 Since Firebase is using a no-sql database I still think that regular relationship database is good to use. In this case I can divide my data into to tables and then get the data I want with one query. But if there is alot of data with many relations e.g a web shop, I think that a relationship database is better. Then you can query the result you want so you don't filter the result in your backend. The database will have to handle many queries but they are built to handle many queries. But for smaller projects I like to use a no-sql database like Firebase because it's so easy to use and very modern.
 
-## Own module
+### Own module
 
 [Firebase-auth-node](https://www.npmjs.com/package/firebase-auth-node) is a module that is used to authenticate the user through [Firebase](https://firebase.google.com/) own authentication method with email and password. If sign in is successful it will return the id token and uid of the user as an object. 
 NPM is a powerful packagemanager and is really easy to use. The way Node.js modules and npm works is great and the way the package.json file works with npm is really making it easy to develop new projects. If you want to upload your own module it is also really easy because of the way the package.json file is built.
