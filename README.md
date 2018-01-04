@@ -43,7 +43,6 @@ On line 5 change, to the port you choose for the server.
 
 `const URL = 'ws://localhost:3000/'`
 
-### Start frontend
 
 ## Build project
 
@@ -96,7 +95,7 @@ Scruitinizer but I like that they got everything you need in for your CI. I choo
 
 ## Realtime
 
-Realtime is used for communications between frontend and backend. This is done by having the backend server running a [Websocket module](https://www.npmjs.com/package/ws) to achieve the realtime functionality. 
+Realtime is used for communications between frontend and backend. This is done by having the backend server running a [Websocket module](https://www.npmjs.com/package/ws) to achieve the realtime functionality. Every request made from frontend is sent with a websocket. This technique is really easy and flexible to use because it's possible to send JSON objects between frontend and backend. This makes it easy to filter what kind of message/request that is coming to the receiver.
 
 ## Database
 
@@ -108,4 +107,5 @@ Since Firebase is using a no-sql database I still think that regular relationshi
 
 ## Own module
 
-[Firebase-auth-node](https://www.npmjs.com/package/firebase-auth-node) is a module that is used to authenticate the user through [Firebase](https://firebase.google.com/) own authentication method with email and password.
+[Firebase-auth-node](https://www.npmjs.com/package/firebase-auth-node) is a module that is used to authenticate the user through [Firebase](https://firebase.google.com/) own authentication method with email and password. If sign in is successful it will return the id token and uid of the user as an object. 
+NPM is a powerful packagemanager and is really easy to use. The way Node.js modules and npm works is great and the way the package.json file works with npm is really making it easy to develop new projects. If you want to upload your own module it is also really easy because of the way the package.json file is built.
