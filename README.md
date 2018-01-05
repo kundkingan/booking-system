@@ -48,7 +48,7 @@ Run `$ ng build` to build the project. The build artifacts will be stored in the
 
 ## Running tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `$ ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 Use the  `--single-run false` flag for no single run.
 
@@ -56,20 +56,22 @@ Use the  `--single-run false` flag for no single run.
 
 ### Running tests
 
-You can run 3 different test within the docker containers that contains the different node versions, then execute the following:
+You can run 3 different test within a docker container. Each container contains a node version. 
+
+To run a test execute the following:
 
 ```bash
 # Build images
-npm run docker-build
+$ npm run docker-build
 
 # Node v8
-npm run docker-test-8
+$ npm run docker-test-8
 
 # Node v9
-npm run docker-test-9
+$ npm run docker-test-9
 
 # Node latest
-npm run docker-test-latest
+$ npm run docker-test-latest
 ```
 
 
