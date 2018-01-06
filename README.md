@@ -89,6 +89,9 @@ The point of this project is to build a booking application that is simple and e
 
 ### CI
 
+I choose to use two different tools for each area e.g build status, code coverage and code quaility. This is because I'm not a super fan of 
+Scruitinizer but I like that they got everything you need in for your CI. I choose to not only use Scrutinizer and instead use additional tools evaluate my code. This is because I think it's good to get to know not only one tool but multiple to gain more knowledge and experience and also to see what's the difference between the results. Mostly the use of additional tools is also because I really don't like the design of Scrutinizer website and is more a fan of Travis, Codecov and Codeclimate, they feel more modern than Scrutinizer.
+
 Below you will find what each of the testing tools provide to my CI
 
 #### Scrutinzer 
@@ -112,9 +115,6 @@ Codecov for code coverage
 [![Maintainability](https://api.codeclimate.com/v1/badges/58920c3afec03c58e431/maintainability)](https://codeclimate.com/github/kundkingan/booking-system/maintainability)
 
 Codeclimate for code quality
-
-I choose to use two different tools for each area e.g build status, code coverage and code quaility. This is because I'm not a super fan of 
-Scruitinizer but I like that they got everything you need in for your CI. I choose to not only use Scrutinizer and instead use additional tools evaluate my code. This is because I think it's good to get to know not only one tool but multiple to gain more knowledge and experience and also to see what's the difference between the results. Mostly the use of additional tools is also because I really don't like the design of Scrutinizer website and is more a fan of Travis, Codecov and Codeclimate, they feel more modern than Scrutinizer.
 
 ### Realtime
 
