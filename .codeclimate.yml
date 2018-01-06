@@ -1,0 +1,3 @@
+exclude_patterns:
+- "src/app/_services/services/*.*.spec.ts"
+- "karma.conf.js"
