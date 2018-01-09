@@ -27,6 +27,7 @@ module.exports = (server) => {
 	  ws.on('close', (code, reason) => sendHandler.onClose(ws, code, reason));
 
 	  ws.on('error', (code, reason) => sendHandler.onClose(ws, code, reason));
+
 	});
 
 	return wss;

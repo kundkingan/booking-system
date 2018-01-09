@@ -48,7 +48,7 @@ Run `$ ng build` to build the project. The build artifacts will be stored in the
 
 ## Running tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `$ ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 Use the  `--single-run false` flag for no single run.
 
@@ -68,43 +68,65 @@ docker-compose run server
 
 ### Running tests
 
-You can run 3 different test within the docker containers that contains the different node versions, then execute the following:
+You can run 3 different test within a docker container. Each container contains a node version. 
+
+To run a test execute the following:
 
 ```bash
 # Build images
-npm run docker-build
+$ npm run docker-build
 
 # Node v8
-npm run docker-test-8
+$ npm run docker-test-8
 
 # Node v9
-npm run docker-test-9
+$ npm run docker-test-9
 
 # Node latest
-npm run docker-test-latest
+$ npm run docker-test-latest
 ```
 
 
 ## About
 
+The point of this project is to build a booking application that is simple and easy to use. My frontend is built by using Angular. The use of Angular is because I have experience with Angular since before and I think it's a really great framework to use if you want to get started with an web application fast and smooth. Angular also used TypeScript which makes the code cleaner and better scaleable. For backend I choose to use Express also because I've used it before and it's really flexibile, simlpe and got good performance.
+
+### Features
+
+* Secure login with Firebase
+* Realtime booking
+* See previously booking
+* Responsive for mobile
+
+
 ### CI
-
-[![Build Status](https://scrutinizer-ci.com/g/kundkingan/booking-system/badges/build.png?b=master)](https://scrutinizer-ci.com/g/kundkingan/booking-system/build-status/master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kundkingan/booking-system/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/kundkingan/booking-system/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/kundkingan/booking-system/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/kundkingan/booking-system/?branch=master)
-Scrutinizer is used for build status, code coverage and code quaility. 
-
-[![Build Status](https://travis-ci.org/kundkingan/booking-system.svg?branch=dev)](https://travis-ci.org/kundkingan/booking-system)
-Travis for build status
-
-[![codecov](https://codecov.io/gh/kundkingan/booking-system/branch/master/graph/badge.svg)](https://codecov.io/gh/kundkingan/booking-system)
-Codecov for code coverage
-
-[![Maintainability](https://api.codeclimate.com/v1/badges/58920c3afec03c58e431/maintainability)](https://codeclimate.com/github/kundkingan/booking-system/maintainability)
-Codeclimate for code quality
 
 I choose to use two different tools for each area e.g build status, code coverage and code quaility. This is because I'm not a super fan of 
 Scruitinizer but I like that they got everything you need in for your CI. I choose to not only use Scrutinizer and instead use additional tools evaluate my code. This is because I think it's good to get to know not only one tool but multiple to gain more knowledge and experience and also to see what's the difference between the results. Mostly the use of additional tools is also because I really don't like the design of Scrutinizer website and is more a fan of Travis, Codecov and Codeclimate, they feel more modern than Scrutinizer.
+
+Below you will find what each of the testing tools provide to my CI
+
+#### Scrutinzer 
+[![Build Status](https://scrutinizer-ci.com/g/kundkingan/booking-system/badges/build.png?b=master)](https://scrutinizer-ci.com/g/kundkingan/booking-system/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kundkingan/booking-system/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/kundkingan/booking-system/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/kundkingan/booking-system/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/kundkingan/booking-system/?branch=master)
+
+Scrutinizer is used for build status, code coverage and code quaility. 
+
+#### Travis
+[![Build Status](https://travis-ci.org/kundkingan/booking-system.svg?branch=dev)](https://travis-ci.org/kundkingan/booking-system)
+
+Travis for build status
+
+#### Codecov
+[![codecov](https://codecov.io/gh/kundkingan/booking-system/branch/master/graph/badge.svg)](https://codecov.io/gh/kundkingan/booking-system)
+
+Codecov for code coverage
+
+#### Codeclimate
+[![Maintainability](https://api.codeclimate.com/v1/badges/58920c3afec03c58e431/maintainability)](https://codeclimate.com/github/kundkingan/booking-system/maintainability)
+
+Codeclimate for code quality
 
 ### Realtime
 
