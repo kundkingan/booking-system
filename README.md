@@ -54,6 +54,18 @@ Use the  `--single-run false` flag for no single run.
 
 ## Docker
 
+### Run project
+
+I'm using Docker-compose for this project. To deploy with docker, execute the following:
+
+```bash
+# Build image
+docker-compose build server
+
+# Start image
+docker-compose run server
+```
+
 ### Running tests
 
 You can run 3 different test within the docker containers that contains the different node versions, then execute the following:
