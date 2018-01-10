@@ -4,6 +4,7 @@
 	"license": "MIT",
 	"scripts": {
 		"start": "node server/server.js $PORT",
+		"postinstall": "ng build --aot -prod",
 		"build": "ng build",
 		"lint": "ng lint",
 		"test": "ng test",
