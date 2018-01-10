@@ -89,15 +89,15 @@ $ npm run docker-test-latest
 
 ## About
 
-The point of this project is to build a booking application that is simple and easy to use. My frontend is built by using Angular. The use of Angular is because I have experience with Angular since before and I think it's a really great framework to use if you want to get started with an web application fast and smooth. Angular also used TypeScript which makes the code cleaner and better scaleable. For backend I choose to use Express also because I've used it before and it's really flexibile, simlpe and got good performance.
+The point of this project is to build a booking application that is simple and easy to use. The ide behind this project is to have an admin that controls the users either via a GUI or directly from firebase. Then users get their user credentials and can do their booking of some sort. 
+My frontend is built by using Angular. The use of Angular is because I have experience with Angular since before and I think it's a really great framework to use if you want to get started with an web application fast and smooth. Angular also used TypeScript which makes the code cleaner and better scaleable. For backend I choose to use Express also because I've used it before and it's really flexibile, simple and got good performance.
 
 ### Features
 
 * Secure login with Firebase
 * Realtime booking
 * See previously booking
-* Responsive for mobile
-
+* Responsive
 
 ### CI
 
